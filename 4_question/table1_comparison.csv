@@ -1,0 +1,18 @@
+alpha,quantity,ours,paper,ours_over_paper,status
+1.01,time to 10^3 (d),1.944e+06,1.96e+06,0.9919,close (<5%)
+1.01,time to 10^6 (d),10^4323.3,not calculated,,paper: not calculated
+1.01,extinction from 10^3 (d),59.53,59,1.0090,close (<5%)
+1.01,extinction from 10^6 (d),196.5,7.03e+03,0.0280,DIFFERS
+1.001,time to 10^3 (d),2139,2.13e+03,1.0042,agrees (<0.5%)
+1.001,time to 10^6 (d),10^437.2,not calculated,,paper: not calculated
+1.001,extinction from 10^3 (d),234.7,234,1.0029,agrees (<0.5%)
+1.001,extinction from 10^6 (d),1498,8.73e+03,0.1716,DIFFERS
+1.0001,time to 10^3 (d),1359,1.3e+03,1.0453,close (<5%)
+1.0001,time to 10^6 (d),4.927e+47,5.07e+09,97185395914235738537949324284646129664.0000,DIFFERS
+1.0001,extinction from 10^3 (d),578.5,1.01e+03,0.5727,DIFFERS
+1.0001,extinction from 10^6 (d),1.038e+04,5.94e+04,0.1748,DIFFERS
+1.0,time to 10^3 (d),1297,1.3e+03,0.9978,agrees (<0.5%)
+1.0,time to 10^6 (d),2.679e+06,2.68e+04,99.9457,DIFFERS
+1.0,extinction from 10^3 (d),6187,6.19e+03,0.9995,agrees (<0.5%)
+1.0,extinction from 10^6 (d),4.805e+06,4.8e+06,1.0011,agrees (<0.5%)
+1.0,"time to 10^6 (d), vs the text's 2.68e6",2.679e+06,2.68e+06,0.9995,agrees (<0.5%)
