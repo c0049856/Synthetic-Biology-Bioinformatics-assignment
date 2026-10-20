@@ -151,3 +151,85 @@ I used Δt = 0.1 days. The repo’s code defaults to 1/24 day, and which one the
 The seed is 20261020, and the software versions are Python 3.13.16, numpy 2.5.3, mpmath 1.4.1.
 
 Next we can add these duration rows to results_map.md, then move on to the noise figure A3. Shall we?
+
+### User: 
+How to add these durations to results_map.md, please?
+
+### Claude (Sonnet 5.5): 
+Open results_map.md, paste these rows underneath your existing Figure 1 rows, and keep each row on a single line with the same seven columns. Then commit the file. If the table has stopped rendering, check that each row has the same number of | separators as the header.
+
+markdown
+| Text: 1 to 10^3 cells, q/p = 1 | Eq 23 (Eqs 21-22) | Δt = 0.1 d, n = 10^3, p = 0.5 | m_0 = 0 (a death at 1 cell is an instant restart); no ceiling | Days; p and q/p have no units | Results, "From 1 to n"; Appendix 3 | Matches: 1,297 d (paper 1.297e3) |
+| Text: 1 to 10^6 cells, q/p = 1 | Eq 23 | Δt = 0.1 d, n = 10^6 | Same as above | Days (about 7,300 years; paper says ~7000) | Results, "From 1 to n" | Matches: 2.68e6 d |
+| Text: extinction from 10^3, q/p = 1 | Eq 28 | Δt = 0.1 d, i = 10^3, carrying capacity K = 10^16 | Absorbed at 0 cells; ceiling at K (only down-steps) | Days | Results, end of "Time from N to 0"; Appendix 4.1 | Matches: 6,187 d = 16.9 years (paper: 17 years) |
+| Text: extinction from 10^6, q/p = 1 | Eq 28 | Δt = 0.1 d, i = 10^6, K = 10^16 | Same as above | Days | Same as above | Matches: 4.805e6 d = 13,156 years (paper: over 13 thousand) |
+| Table 1, time to 10^3 | Eqs 16-18 (Eq 23 at q/p = 1) | q/p = 1.01, 1.001, 1.0001, 1; Δt = 0.1 d; n = 10^3 | m_0 = 0; no ceiling | Days | Table 1 | q/p = 1.001 and 1 agree; 1.01 is 0.8% off (ours 1.944e6, paper 1.96e6); 1.0001 differs (ours 1,359, paper 1.30e3, which equals the q/p = 1 value) |
+| Table 1, time to 10^6 | Eqs 16-18 (Eq 23 at q/p = 1) | Same, n = 10^6 | Same | Days | Table 1 | q/p = 1 matches the text (2.68e6) but the table prints 2.68e4 (probable typo, check the PDF); 1.01 and 1.001 are "not calculated" in the paper (ours 10^4323 and 10^437 d); 1.0001 differs (ours 4.9e47, paper 5.07e9) |
+| Table 1, extinction from 10^3 | Eq 27 (q/p > 1), Eq 28 (q/p = 1) | Same q/p values; i = 10^3; K = 10^16 for q/p = 1 | Absorbed at 0; T finite for q/p > 1; ceiling at K for q/p = 1 | Days | Table 1; Appendix 4 | Matches for 1.01, 1.001 and 1; 1.0001 differs (ours 578, paper 1.01e3) |
+| Table 1, extinction from 10^6 | Eq 27, Eq 28 | Same, i = 10^6 | Same | Days | Table 1; Appendix 4 | q/p = 1 matches; all three q/p > 1 differ (ours 196.5, 1,498, 10,380; paper 7,030, 8,730, 59,400). Unresolved |
+
+Three notes:
+
+Status is a draft. It comes from the script output, so check each entry yourself before you keep it, especially the Table 1 values in the original PDF.
+Δt = 0.1 days is an assumption. It comes from the paper’s worked examples. Several cells match with it, but the paper doesn’t state it for Table 1, so add that to your “missing information” list.
+The Eq 28 units point. In Eq 28 the i/n term has no Δt, unlike every other term. It’s negligible here, so it doesn’t affect any of these rows, but it belongs in your discrepancy notes.
+
+Two things don’t go in the map: the random simulation check (seed 20261020) is for your AI log, and the scratch test I ran on the authors’ forward recurrence isn’t a published result.
+
+Shall we move on to the noise figure A3?
+
+### User: 
+Yes, please. Could you please explain to me why and how did they introduce the random noise in this figure, and then how does it change the results? 
+
+### Claude (Sonnet 5.5): 
+I’ll look at Figure A3 in the appendix first so I describe it accurately. Then I’ll run the noise experiment myself, so I can show you how much it changes the results.
+
+Figure A3 shows base-curve values I can test directly. Before building the noise experiment, I’ll check the other appendix figures too, since they also tell me which Δt the authors used.
+
+The noise lines in Figure A3 are a robustness check, and the “small” noise turns out to be larger than it looks. I’ve sent figA3_comparison.png (the published figure beside two of our versions) and noise.py (which imports durations.py).
+
+Why the noise is there. The model assumes q/p is a fixed number. In reality it is never known exactly and wouldn’t stay constant. The authors wanted to know whether the predictions fall apart if q is slightly off. Their text concludes that random variation has only a “modest effect”.
+
+How it’s done. The black line is the base case, q = 0.5002 (so q/p = 1.0008). Each red line draws one random number between −0.0002 and +0.0002, adds it to q, and recomputes the whole extinction-time curve. So each red line is a world where q is a hair different but fixed. The authors’ code does this once per trajectory, not at every step. The paper’s discussion could be read either way, so note it.
+
+What it changes (10,000 runs per variant, seeds 20261020 for the plot and 20261021 for the statistics):
+
+At n = 1000: the base time is 108.8 days, and the middle run matches it. The 5th to 95th percentile range is 0.72× to 2.47× the base (78 to 269 days), and the average is 21% higher.
+Smaller n: at n = 100 the range is 0.82× to 1.75×, and at n = 10 it is 0.88× to 1.47×. So the effect grows with n, as the appendix says.
+Why it looks small: ±0.0002 sounds tiny, but what drives the time is q − p, which is only 0.0004 here. The noise changes it by ±0.0004, which is ±100% of that value. The log₁₀ axis also squeezes a factor of 2 to 3 into about ±0.2 on the plot. Whether that counts as “modest” is a judgement. Report the numbers and say so.
+Why the average goes up: as q/p approaches 1 the time rises steeply, so a nudge towards 1 adds more than an equal nudge away takes off.
+
+How our version compares. The version that follows the caption looks like the published figure: same black line, similar fan of red lines. The authors’ MATLAB, as written, perturbs p by up to ±0.00025, which is a bit wider. In 10.6% of runs q/p drops to 1 or below, so the extinction time is undefined and MATLAB would give complex numbers. A few early-flaring lines also appear. The published figure shows neither, so it probably wasn’t made with the repo’s noise setting. This is unresolved, and with only 20 lines I can’t be certain. A couple of readings from the published plot (such as where the red fan ends) were by eye.
+
+Δt settles at last. I checked the start and end values of each appendix figure. A3 matches Δt = 1/24 day: the model gives −0.23 and 2.04 where the figure shows about −0.24 and 2.04 (Δt = 0.1 would give +0.15 and 2.42). A1, A2 and A4 match Δt = 0.1. The paper states neither, so record it as missing information.
+
+A side finding on A4, to check yourself. The visible gap between its two blue curves (about 2.67 against 2.82) matches what the MATLAB analytic line produces, 2.66, while the paper’s own Eq 4.17 gives 2.82. So the gap seems to come from that code line, not from the harmonic-number approximation the appendix blames.
+
+For your records, noise.py is AI-generated, and the software versions are Python 3.13.16, numpy 2.5.3, matplotlib 3.11.2, mpmath 1.4.1.
+
+Next we could add the A3 rows and the Δt finding to results_map.md, or you could draft your “unresolved differences” list. Which would you like?
+
+### User: 
+Could we do both please, and then maybe move to Figure 2? 
+
+### Claude (Sonnet 5.5): 
+I’ll write the draft unresolved-differences list as a file you can commit, and give you the A3 rows to paste inline.
+
+Paste these three rows into results_map.md below the duration rows:
+
+markdown
+| Fig A3, black base curve | Eqs 4.1-4.3, forward recurrence, with tau_1 from Eq 4.7 | q = 0.5002 (q/p = 1.0008, p = 0.4998); Δt = 1/24 d (inferred, not stated); n = 1 to 1000 | Absorbed at 0 cells; tau_1 chosen so T stays finite | Days, plotted as log10; q and p have no units | Appendix 4, Figure A3 (p. 8) | Matches: model start/end -0.23/2.04 vs published about -0.24/2.04 (by eye). Δt is inferred |
+| Fig A3, red noise lines | Same recurrence, rerun with a perturbed q | Uniform noise of +-2e-4 on q (caption); one draw per trajectory; 20 lines assumed; seeds 20261020 (plot), 20261021 (10,000-run statistics) | Same as above | Days, plotted as log10 | Appendix 4, Figure A3 caption; main text, "From 1 to n" | Resembles the published figure with the caption setting. The authors' MATLAB setting (+-2.5e-4 on p) does not: 10.6% of runs have q/p <= 1. Our result at n = 1000: 5th to 95th percentile 0.72x to 2.47x the base time, mean 1.21x (our extension, not published) |
+| Δt in Figs A1-A4 | Appendix 3 and 4 recurrences | A1, A2, A4: 0.1 d; A3: 1/24 d (all inferred from curve start/end values read by eye) | n/a | Days | Appendix 3 (0.1 d in worked example); repo MATLAB default c = 1/24 | Inferred, not stated in the paper. Recorded in unresolved_differences.md (A1) |
+
+I’ve also sent unresolved_differences.md, which groups what we found into four sections: missing information, paper numbers we couldn’t reproduce, differences between the paper and the authors’ code, and other inconsistencies. Each entry names where it appears and what we tried.
+
+Three things to do yourself before you rely on it:
+
+Check every entry. The list is a draft from our AI-assisted work. Verify each item against the paper, the appendix PDF and the code. Several rest on values read from images by eye, and those are marked “by eye” in the file.
+Check Table 1 in the original PDF. B3 (the 2.68×10⁴ typo) and the Table 1 values came through text extraction, so confirm them against the original.
+Leave out anything you can’t confirm. If you can’t verify an entry, tell your professor it is unverified rather than deleting it silently. That matches the brief’s instruction to record missing information explicitly.
+
+Later, A4 will need its own row once we reproduce it, and C2 in the list is the entry that row should settle.
+
+Shall we start on Figure 2 now?
