@@ -23,3 +23,6 @@ Cores: 12
 Registry:
 
   ide.experimental.ui=true
+
+
+Please note scripts for a4, fig2, fig1, noise, a3 require images which are in "published" folder (these are the images from Curtis et al., paper, used for side-by-side comparison). 
