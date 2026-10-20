@@ -114,3 +114,40 @@ Two things to do yourself:
 The Status column is my draft from our comparison. Check each entry against the images yourself before you keep it, particularly “Matches” for the figures.
 Commit results_map.md to your repo with the script, so the table and the code stay together.
 Next come the duration numbers, which will add rows for Table 1 and the times in the text. Shall we start there?
+
+### User: 
+Let's check the duration numbers, please!
+
+### Claude (Sonnet 5.5): 
+I’ll turn the earlier scratch checks into a proper script covering every duration number in Table 1 and the text. The script also tests the small-population and q/p = 1 cases against an independent random simulation, with a recorded seed.
+
+Most of the paper’s duration numbers reproduce, but three groups of Table 1 entries do not. I’ve sent durations.py and table1_comparison.csv, which lists every cell as ours against the paper’s.
+
+What matches (Δt = 0.1 days throughout):
+
+Text numbers: 1,297 days for 1 to 10³ cells and 2.68×10⁶ days (about 7,300 years, which the paper rounds to “~7000”) for 1 to 10⁶ cells. Extinction takes 16.9 years from 10³ cells and 13,156 years from 10⁶ cells, matching the paper’s “17” and “over 13 thousand”.
+Table 1:
+Every q/p = 1 cell matches except one, covered below.
+Both 10³ columns at q/p = 1.001 match.
+Extinction from 10³ matches at q/p = 1.001 and 1.01.
+Small populations: the paper’s approximation for q/p = 1 is accurate even for two cells (error 0.09%).
+Independent check: I simulated the process directly, with seed 20261020 and 20,000 runs per case. All four simulated means (1 to 10 cells at q/p = 1 and 1.1, extinction from 5 and 20 cells at q/p = 1.2) fall within their 95% uncertainty of the formulas. So my reading of Δt, p and q behaves as the model says.
+
+What does not match (all to record as unresolved):
+
+Extinction from 10⁶ cells (all three q/p > 1 rows). We get 196.5, 1,498 and 10,380 days, and the table says 7,030, 8,730 and 59,400. I trust ours for two reasons. A back-of-envelope check gives about 197 days at q/p = 1.01. The authors’ forward recurrence in ordinary floating point overflows at 10⁶ steps, so that can’t explain the paper’s finite numbers either.
+The q/p = 1.0001 row:
+Time to 10³: ours 1,359 days against 1.30×10³ in the table, which is the q/p = 1 value.
+Time to 10⁶: ours 4.9×10⁴⁷ against 5.07×10⁹.
+Extinction from 10³: ours 578 against 1,010.
+The q/p = 1 time to 10⁶. The table prints 2.68×10⁴, but the text and appendix say 2.68×10⁶, and ours matches the text. Likely a typo in the table, but verify it in the original PDF.
+
+Smaller gaps are 1.944×10⁶ against 1.96×10⁶ at q/p = 1.01, and 59.5 against 59. The cells the paper marks as “not calculated” (time to 10⁶ at q/p = 1.01 and 1.001) come out at 10⁴³²³ and 10⁴³⁷ days. That is beyond ordinary floating point, which explains why they couldn’t be calculated.
+
+For your records:
+
+durations.py is AI-generated. My checks of Table 1 are mine, so verify the table values in the original paper yourself.
+I used Δt = 0.1 days. The repo’s code defaults to 1/24 day, and which one the appendix figures use is still unknown.
+The seed is 20261020, and the software versions are Python 3.13.16, numpy 2.5.3, mpmath 1.4.1.
+
+Next we can add these duration rows to results_map.md, then move on to the noise figure A3. Shall we?
