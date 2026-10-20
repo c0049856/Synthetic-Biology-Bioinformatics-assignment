@@ -1,0 +1,6 @@
+Python 3.13.16
+numpy 2.5.3
+scipy 1.18.1
+matplotlib 3.11.2
+mpmath 1.4.1
+Pillow 12.3.0
