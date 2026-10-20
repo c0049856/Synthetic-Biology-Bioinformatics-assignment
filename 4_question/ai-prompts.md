@@ -247,7 +247,30 @@ We’ve already done most of 4.3. I’d suggest closing three gaps:
 Shall I start with the probability simulation?
 
 ### User: 
-Yes please. Once we close all these three gaps, we can then move on to other figures.
+Yes please. Once we close all these three gaps, we can then move on to other figures (depends on how much time we have too).
 
 ### Claude (Sonnet 5.5):
 I’ll close all three gaps in turn. First the probability simulation, plus a check on whether Octave is available here to run the authors’ MATLAB, and a higher-resolution raster of the appendix page for measuring the published A3 spread.
+
+All three gaps in brief item 3 are now closed. Gap 2 is closed as “measured, not explained”, and Gap 3 is a port rather than a real run of the authors’ MATLAB.
+
+Gap 1: small populations. I simulated the game directly in 8 small cases, including equal birth and death and starting sizes of 1 to 5. The formulas match: 6 of 8 fell inside the 95% interval. The two misses were chance, because 10 times more runs with a new seed gave z = −0.21 and +0.52. Seeds are recorded in the script (prob_check.py).
+
+Gap 2: spread in Figure A3. I measured the red noise lines from the published figure and compared them with our simulations.
+
+Calibration: our black curve matches the published one to 0.003 log10 days.
+Published spread: the red lines reach about +0.12 to +0.24 above the black curve and −0.09 to −0.26 below it. The measurement is accurate to about ±0.02.
+Our versions: these are wider on top (about 0.3 to 0.4) and narrower below (about 0.11 to 0.14).
+Per-step noise: a third reading, with new noise at every step, gives almost no spread (about 0.01), so it is ruled out.
+Conclusion: none of our versions reproduces the published asymmetry, and the number of lines and the exact noise model are not stated. The paper’s message, that noise has a modest effect on a log scale, holds in every version. I’ve recorded this as unresolved, not forced to fit.
+
+Gap 3: the authors’ MATLAB. There is no MATLAB or Octave here, so matlab_port.py is a line-by-line Python re-typing with their constants and quirks. It is not a run of the original, and your records should say so.
+
+Agreement: the port’s recurrences match our independent code to better than 1e-13.
+Figure A4 gap: the analytic and recurrence curves differ because MATLAB line 283 has 2c(H_i−1) where the paper’s Eq 4.17 has 2Δt(i−1). With Δt = 0.1 d the port gives 2.665 and 2.820, matching the published ~2.67 and ~2.82. The appendix blames the harmonic-number approximation, but that approximation is accurate to better than 1e-4.
+Cube term: the MATLAB harmonic approximation has (k−1)³ where the paper has (k−1)². The cube version is 2.2% off at n = 10 and negligible from n = 100.
+1/N term: the MATLAB starts the equal-case recurrence with 1/N, so it exceeds Eq 4.17 by about 1 day at i = 1000.
+
+unresolved_differences.md now has sections C2 to C4 quantified, a new section E with these checks, and a seeds and software-versions table.
+
+On time, the quickest remaining model-based figures are Fig 2, Fig 5, A1, A2 and A4, in that order; I’d skip Fig 3 because it is real wastewater data. A4 should be fast since the port already produces it. Should I start with Fig 2, or A4 first?
