@@ -17,6 +17,6 @@ Then the insert was redesigned (with BamHI in front of promoter and EcoRI right 
 For Gibson/Golden Gate, primers were introduced that would create a BsaI cut site. The overall product created was 4212bp long (primers introduced overhangs). 
 
 If BsaI site is introduced: 
-- do we need two BsaI sites? 
+- do we need two BsaI sites? Two for the backbone, two for inserts? 
 ------------------------------------------------------------------------------------
 Comparing them side by side there is a difference in the position to where the insert has been inserted. The restriction enzymes cut the backbone open at ~1,040bp, opened it up and put the insert there. For Gibson/Golden Gate ligation, the primers introduced 
