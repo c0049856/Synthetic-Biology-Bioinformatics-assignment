@@ -1,3 +1,8 @@
-| Which equation produces the graph? | Which parameter values are used? | Which boundary conditions apply? | What units apply? | Where it appears in the paper? |
-| --- | --- | --- | --- | --- |
-| x | x | x | x | x |
+| Result | Which equation produces it? | Which parameter values are used? | Which boundary conditions apply? | What units apply? | Where it appears in the paper | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| Fig 1a | Eq 1 (Eq 2 when q/p = 1) | i = 1, N = 10^4, q/p from 0.92 to 1.04 (range read by eye; paper does not state it) | P_0 = 0 (extinction is final), P_N = 1 (reaching N is success) | P is a probability (no units), plotted as log10; q/p has no units; no time involved | Results, "Mutation, where i = 1"; Figure 1a | Matches (same shape, ends near -170 at q/p = 1.04) |
+| Fig 1b | Eq 1 (Eq 2 when q/p = 1) | Same as 1a, but P plotted on a linear axis (0 to 0.08) | Same as 1a | P has no units; q/p has no units | Figure 1b (inset) | Matches |
+| Fig 1c | Eq 1 | i = 1; q/p = 1.0001, 1.00001, 1.000001 (inferred); N = 10^x with x from 1.0 in steps of 0.1, up to 6, 7 and 8 | Same as 1a | N is a number of cells, plotted as log10 N; P plotted as log10 | Figure 1c and caption | Matches with inferred parameters. Unresolved: caption says q/p = 1.0001, colour bar says 1.000025 to 1.0001, and the x-axis is not labelled as log10 |
+| Text: q/p = 0.95 | Eq 1 | i = 1, N = 10^4 | Same as 1a | Probability | Results, "Mutation, where i = 1" | Matches: P = 0.05, extinction 19 times more likely (paper: ~20) |
+| Text: q/p = 1.05 | Eq 1 | i = 1, N = 10^3 | Same as 1a | Probability | Results, "Mutation, where i = 1" | Matches: P is about 10^-22, below the paper's 10^-21 |
+| Text: bioaugmentation example | Eq 1 | i = 10^8, N = 10^10, q/p = 1.00000001 | Same as 1a | Probability | Results, "Probiotics and bioaugmentation where i > 1" | Differs slightly: we get 6.4 x 10^-44, paper says 10^-43 (probably rounding) |
