@@ -351,3 +351,35 @@ Figure 4: this probably depends on the real wastewater data, so I’ll check whe
 Records: your results_map.md rows for Fig 2, A1, A2 and A4 still need adding. I can draft those now.
 
 I’d do the results_map.md rows first. Then I’d check Fig 5 and Fig 4 and tell you honestly what’s feasible. Shall I go ahead?
+
+### User:
+Yes please, let's update the results_map.md now, and then check figures 5 and 4.
+
+### Claude (Sonnet 5.5):
+Figures 4 and 5 are both reproduced, and results_map_additions.md has the rows for your results_map.md.
+
+My earlier guess that Figure 4 depended on real wastewater data was wrong. It is purely model-based (Eq 9 and Eq 10), so it was in scope after all. Only Figure 3 uses real data, and I’d leave it out.
+
+Results
+
+Figure 4: panel a plots Eq 10 for ID50 = 1 to 1000, and the ten isolated dots agree within 0.002. Panel b plots Eq 9 with q/p = 0.99999931, and the curve agrees within 0.003 in probability. Both grids are inferred from the dots, and I’ve logged that.
+Figure 5: panel b agrees within 11 hours (one pixel is 19 hours). In panel a the curves leave the plot at n = 252, 619 and 797, against about 250, 620 and 800 in the published figure.
+Δt for Figure 5: it only fits if Δt is 1 hour, not the 0.1 day used for Table 1. The axes are labelled in hours, and 0.1 d would make the curves 2.4 times too high. So the paper uses different Δt values for different results and never says which. I’ve logged this as A1b.
+Legend label: the orange series in Fig 5 is labelled 1.00001, whereas Table 1’s row is 1.0001.
+
+A new inconsistency in the text (B8): the cholera example below Eq 15 doesn’t reproduce.
+
+The text gives N = 7.3×10⁷ from 8.53×10³ vibrios/g × 1200 g, but that product is 1.02×10⁷.
+The stated q/p range gives an upper ID50 of 4.2×10⁸, where the text says 4.4×10⁷.
+I did this by hand arithmetic only, so check it against the paper before you rely on it.
+The three ID50-to-q/p examples (Campylobacter, Salmonella, Vibrio) do reproduce.
+
+published_images.zip is updated with the page 6 and 7 images, so please re-download it. unresolved_differences.md now has everything above, and every model-based figure (1, 2, 4, 5, A1 to A4, Table 1) is covered.
+
+What I’d do next
+
+Paste the rows into your results_map.md. They use 7 columns (Result first, Status last), so adjust if your file has 5. The Fig 1 and Table 1 rows you already have.
+Draft the README “Scope and rationale” paragraph: why Fig 3 is excluded, which numbers were inferred, and the seeds table.
+Collect the AI prompt log and the AI-generated code identification the brief asks for. This is a marked item and I haven’t handled it yet.
+
+Shall I start with the README paragraph?
