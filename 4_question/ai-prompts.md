@@ -233,3 +233,21 @@ Leave out anything you can’t confirm. If you can’t verify an entry, tell you
 Later, A4 will need its own row once we reproduce it, and C2 in the list is the entry that row should settle.
 
 Shall we start on Figure 2 now?
+
+### User: 
+Before doing that, could we work on 4.3 please, and finish with what we are still lacking? Could we test a small population, as well as run the code provided by the author, and then once these steps are done we could move to the rest of the simulations? 
+
+### Claude (Soonnet 5.5): 
+We’ve already done most of 4.3. I’d suggest closing three gaps:
+
+- Probability simulation: a short random simulation of the gambler’s ruin game at small sizes (for example i = 1, N = 10, and q/p of 0.9, 1 and 1.1), with a recorded seed and a 95% interval, to test Eqs 1 and 2 independently of the formulas.
+- A3 spread: measure the published red-line spread at n = 1000 from the image and compare it with the spread our runs give.
+- Authors’ MATLAB: if we can get GNU Octave running here, run their script as written and compare its numbers with ours. This is the strongest answer to “use the authors’ code to check your implementation”. If Octave isn’t available, we say so in your records.
+
+Shall I start with the probability simulation?
+
+### User: 
+Yes please. Once we close all these three gaps, we can then move on to other figures.
+
+### Claude (Sonnet 5.5):
+I’ll close all three gaps in turn. First the probability simulation, plus a check on whether Octave is available here to run the authors’ MATLAB, and a higher-resolution raster of the appendix page for measuring the published A3 spread.
