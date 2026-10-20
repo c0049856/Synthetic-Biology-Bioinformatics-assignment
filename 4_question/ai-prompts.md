@@ -62,3 +62,33 @@ I haven’t seen the original figure side by side with mine, so don’t take “
 For your AI log, record this exchange and mark fig1a.py as AI-generated. Put its header comment, Python 3.13.16, numpy 2.5.3, matplotlib 3.11.2, mpmath 1.4.1, and the three bulleted checks above into your notes. The files are in a local folder here, not in a GitHub repo yet.
 
 Next we can do the small inset (Fig 1b, the non-log version) or Figure 1c. Which would you like?
+
+### User: 
+Let's finish figure 1  (both 1b and 1c please)
+
+### Claude (Sonnet 5.5): 
+I’ll start by looking closely at the published panels 1b and 1c, so our axes and ranges match theirs. Then I’ll extend the script.
+
+Panel 1c holds a useful clue. The dots are spaced evenly in log₁₀ N and fall off differently for each q/p. I’ll check the whole figure’s crop, then test my reading of the axes against numbers.
+
+The published panels give me enough to match axes and to test my reading of panel 1c. I’ll write the extended script, which imports the tested function from fig1a.py.
+
+Figure 1 is now reproduced: the file fig1_comparison.png puts the published figure on top and ours underneath, and fig1.py (which needs fig1a.py in the same folder) makes it. Panels a, b and c all have the same shape and sit in the same place as the published ones.
+
+Panel c did not match the paper’s own description, so it needs a note.
+
+x-axis: The published x-axis is not labelled as log₁₀. It is log₁₀ of the population size N, with the dots 0.1 apart starting at 1.0. I inferred this.
+Series: The caption says q/p = 1.0001, and the colour bar runs from 1.000025 to 1.0001. The dots actually follow three series, q/p = 1.0001, 1.00001 and 1.000001, ending at log₁₀ N = 6, 7 and 8. That is what fits.
+Evidence: I read six dots off the published figure by eye and compared them with our numbers. All six agree to within about 0.15 on the y-axis. My reading error is about ±0.5, so this is good agreement but not a proof.
+Label: The published y-axis says “P_i”, but the plotted values are log₁₀ P_i, which is why they are negative.
+All three go into your log under “missing information / unresolved differences”. Optionally, you could ask your professor or the authors what the three series are.
+
+How one result follows from the model, in your own words. When q/p is just above 1, Equation 1 becomes roughly P ≈ (q/p − 1) / (e^((q/p − 1)·N) − 1), so only the product (q/p − 1)·N matters. While N is small compared with 1/(q/p − 1), the game is nearly fair and P is close to 1/N, which is the gentle slope on the left of panel c. Once N passes about 1/(q/p − 1), the exponential takes over and log P plunges. That is why the three curves are the same shape shifted along the axis by a factor of 10 each time. Our check shows this: moving down one series and up one decade of N shifts log₁₀ P by −1.0002.
+
+For your records:
+
+fig1.py is AI-generated, and fig1a.py is its imported helper.
+The axis limits of all panels were estimated by eye from a 300 dpi raster of page 3.
+The software versions are the same as before (Python 3.13.16, numpy 2.5.3, matplotlib 3.11.2, mpmath 1.4.1).
+No seeds are needed, because nothing is random.
+That finishes the Figure 1 rows of the results map. The next stage is the duration calculations, so we could now create results_map.md with the Figure 1 rows filled in, or go straight on to the duration numbers.
