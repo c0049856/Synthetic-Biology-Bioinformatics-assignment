@@ -9,7 +9,7 @@
 -886 bp
 -use PCR to amplify this fragment? or restriction digest but EcoRI could digest backbone
 
-<ins>Golden Gate assembly<ins>
+<ins>Golden Gate assembly</ins>
 **Backbone**: pUC19- https://www.addgene.org/50005/ (2686 bp)
 -lac operator upstream of restriction sites 
 -Cut at 1042 to 1012 
