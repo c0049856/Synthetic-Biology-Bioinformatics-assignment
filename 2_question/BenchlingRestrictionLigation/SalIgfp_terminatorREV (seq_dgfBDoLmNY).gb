@@ -1,0 +1,6 @@
+LOCUS       SalIgfp_terminatorREV     14 bp ds-DNA     linear       22-OCT-2026
+DEFINITION  .
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aacgccctag gtct
+//

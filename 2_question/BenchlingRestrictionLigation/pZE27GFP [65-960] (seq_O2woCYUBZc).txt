@@ -1,0 +1,4 @@
+pZE27GFP [65-960]
+DEFINITION: Plasmid for constitutive expression of gfp.
+ORGANISM: synthetic DNA construct
+SOURCE: synthetic DNA construct

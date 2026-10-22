@@ -1,0 +1,66 @@
+LOCUS       pZE27GFP_[65-960]        902 bp ds-DNA     linear       22-OCT-2026
+DEFINITION  Plasmid for constitutive expression of gfp.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+FEATURES             Location/Qualifiers
+     primer          1..27
+                     /label="SalIgfp_terminatorFOR"
+                     /note="sequence: GTCGACaattcattaaagaggacaaag"
+                     /ApEinfo_revcolor="#85dae9"
+                     /ApEinfo_fwdcolor="#85dae9"
+     source          7..902
+                     /label="source"
+                     /ApEinfo_revcolor="#f8d3a9"
+                     /ApEinfo_fwdcolor="#f8d3a9"
+                     /mol_type="other DNA"
+                     /organism="synthetic DNA construct"
+     misc_feature    7..892
+                     /label="Insert"
+                     /ApEinfo_revcolor="#b1ff67"
+                     /ApEinfo_fwdcolor="#b1ff67"
+     CDS             33..746
+                     /label="GFP (S65T)"
+                     /ApEinfo_revcolor="#84b0dc"
+                     /ApEinfo_fwdcolor="#84b0dc"
+                     /note="excitable with blue light"
+                     /product="S65T variant of Aequorea victoria green fluorescent protein (Heim et al., 1995)"
+                     /translation="MRKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFGYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK"
+     primer_bind     complement(63..91)
+                     /label="GFP-R"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
+                     /note="GFP, reverse primer. Does NOT anneal to EGFP"
+     primer_bind     686..706
+                     /label="GFP-F"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
+                     /note="GFP, forward primer. Does NOT anneal to EGFP"
+     terminator      792..878
+                     /label="rrnB T1 terminator"
+                     /ApEinfo_revcolor="#ff9ccd"
+                     /ApEinfo_fwdcolor="#ff9ccd"
+                     /note="transcription terminator T1 from the E. coli rrnB gene"
+                     /gene="Escherichia coli rrnB"
+     primer          complement(889..902)
+                     /label="SalIgfp_terminatorREV"
+                     /note="sequence: aacgccctaggtct"
+                     /ApEinfo_revcolor="#b1ff67"
+                     /ApEinfo_fwdcolor="#b1ff67"
+ORIGIN
+        1 GTCGACaatt cattaaagag gacaaaggta ccatgcgtaa aggagaagaa cttttcactg
+       61 gagttgtccc aattcttgtt gaattagatg gtgatgttaa tgggcacaaa ttttctgtca
+      121 gtggagaggg tgaaggtgat gcaacatacg gaaaacttac ccttaaattt atttgcacta
+      181 ctggaaaact acctgttcca tggccaacac ttgtcactac tttcggttat ggtgttcaat
+      241 gctttgcgag atacccagat catatgaaac agcatgactt tttcaagagt gccatgcccg
+      301 aaggttatgt acaggaaaga actatatttt tcaaagatga cgggaactac aagacacgtg
+      361 ctgaagtcaa gtttgaaggt gatacccttg ttaatagaat cgagttaaaa ggtattgatt
+      421 ttaaagaaga tggaaacatt cttggacaca aattggaata caactataac tcacacaatg
+      481 tatacatcat ggcagacaaa caaaagaatg gaatcaaagt taacttcaaa attagacaca
+      541 acattgaaga tggaagcgtt caactagcag accattatca acaaaatact ccaattggcg
+      601 atggccctgt ccttttacca gacaaccatt acctgtccac acaatctgcc ctttcgaaag
+      661 atcccaacga aaagagagac cacatggtcc ttcttgagtt tgtaacagct gctgggatta
+      721 cacatggcat ggatgaacta tacaaataat aagcttgatg ggggatccca tggtacgcgt
+      781 gctagaggca tcaaataaaa cgaaaggctc agtcgaaaga ctgggccttt cgttttatct
+      841 gttgtttgtc ggtgaacgct ctcctgagta ggacaaatcc gccgccctag acctagggcg
+      901 tt
+//
