@@ -1,0 +1,64 @@
+# Model parameters for reproducing Lui et al. (2013) Nat Chem 5:1058, supplementary model (S19-S30).
+# Each entry gives the value, its source, and whether it is STATED in the paper or CHOSEN by us.
+# Every CHOSEN value is explained in docs/interpretations.md (numbered I1, I2, ...).
+
+# ---------- Space (S20 item 1) ----------
+grid_size: 50              # STATED  S20 item 1: 50x50 two-dimensional grid
+bacterium_size: 2          # STATED  S20 item 1 and main-text Methods: each bacterium occupies 2x2 cells
+boundary: reflecting       # CHOSEN  I1: S19 only says "except at the boundaries"
+
+# ---------- Binding sites (S21 item 4) ----------
+polymer_sites_for_bacteria: 2     # STATED  S21: P_B = 2 per polymer
+polymer_sites_for_signal: 5       # STATED  S21: P_S = 5 per polymer
+bacterium_sites_for_polymer: 120  # STATED  S21: B_P = 120 per bacterium
+bacterium_sites_for_signal: 60    # STATED  S21: B_S = 60 per bacterium; CHOSEN I2: split as 15 per occupied cell (quadrant)
+
+# ---------- Binding constants (S21 item 4, S26 item 3) ----------
+k_off: 0.002               # STATED for B-S only (k_BS- = 0.002); CHOSEN I3: same k_off used for P-B and P-S
+K_BS: 0.5                  # STATED  S21: K_BS = 0.5 (k+ = 0.001, k- = 0.002)
+polymers:                  # STATED  S26 item 3: affinities used in main-text Figs 2c and 4b
+  P1: {K_PB: 5.0, K_PS: 0.0}    # bacteria sequestrant
+  P2: {K_PB: 0.0, K_PS: 0.1}    # quorum quencher
+  P3: {K_PB: 5.0, K_PS: 10.0}   # dual action
+affinity_sweep: [0.1, 0.5, 1, 5, 10]   # STATED  S26: K_PB and K_PS each over these 5 values (25 runs)
+
+# ---------- Diffusion (S22 items 7-9) ----------
+D_B: 0.0005                # STATED  S22 item 7
+D_P: 0.01                  # STATED  S22 item 7
+D_S: 0.05                  # STATED  S22 item 7
+blocked_factor: 0.1        # CHOSEN  I4: S19 says "significantly smaller", S22 says "not available"
+lambda_viscosity: 8        # STATED  S22 item 8: f(P) = (1/2.2)(tanh((lambda - P)/2) + 1.2)
+cluster_diffusion: D_B_over_m   # CHOSEN I5: S22 item 9 writes D_S/m but describes the bacterial rate
+
+# ---------- Crowding (S23 item 10) ----------
+P_crit: 10                 # STATED  S23 item 10: signal sites on polymers lost when local P >= 10
+
+# ---------- Growth (S23 item 11) ----------
+B0: 25                     # STATED  S23 item 11 (S41 uses B0 = 2)
+B_max: 80                  # STATED  S23 item 11
+doubling_mean: 15000       # STATED  S23 item 11: triangular distribution, mean T
+doubling_width: 20000      # STATED  S23 item 11: so division times span 5000-25000 a.u.
+
+# ---------- Signals ----------
+strains:
+  MM32:  {S0: 10000, production_rate: 0.0,   BS_c: 38}   # STATED S21 item 4 (S0), S22 item 6 (BS_c)
+  BB170: {S0: 0,     production_rate: 0.005, BS_c: 15}   # STATED S21 item 4, S22 item 6, S23 item 12
+
+# ---------- Expression and light (S21-S22 items 5-6) ----------
+K_syn: 0.05                # STATED  S22 item 5
+K_degrad: 0.01             # STATED as "-0.01"; CHOSEN I6: positive value in dBS/dt = -K_degrad * BS
+lum_scale: 2500            # STATED  S22 item 6
+# lum per bacterium = scale * (1 - tanh(dBS/2)),  dBS = 0.25 * (BS_c - BS_express)
+
+# ---------- Polymer concentrations and time (S26 items 1-2) ----------
+polymer_counts: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000]  # STATED S26 item 1 (text); CHOSEN I7: total molecules on grid
+t_end: 30000               # STATED  S26 item 2 (captions say 3000: typo, I8)
+t_record: 100              # STATED  S26 item 2
+time_points: {early: 5000, mid: 15000, late: 30000}  # STATED  S26, Fig 3 caption
+
+# ---------- Numerics (our implementation) ----------
+dt: 0.5                    # CHOSEN  I9: fixed time step instead of exact Gillespie (runtime)
+n_runs: 10                 # STATED  S24 item 13: average of 10 independent runs
+base_seed: 20261021        # CHOSEN: seeds = base_seed + run index, logged in runs/seeds.csv
+slow_every: 10             # CHOSEN  I9: slow processes updated every 10 fast steps
+initial_expression: BS_c   # CHOSEN  I17: cells start with BS_express = BS_c (precultured, half-maximal light)
