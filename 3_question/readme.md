@@ -1,0 +1,1 @@
+This folder answers to question 3 of the assignemnt. The PCR reactions ran in the virtual PCR simulator are in .csv file, and the graphs (produced in Python using a code written by Claude) are also uploaded. 
